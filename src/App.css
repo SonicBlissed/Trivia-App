@@ -1,0 +1,81 @@
+* {
+    background-color: grey;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+.text-content-middle {
+    display: flex;
+    justify-content: center; 
+    text-align: center;
+}
+.text-content-bottom {
+    display: flex;
+    justify-content: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    /* width: 100%; */
+    border: 0;
+    padding: 0;
+}
+.buttons:hover {
+    color: white;
+    cursor:pointer;
+}
+.buttons:disabled:hover{
+    cursor: no-drop;
+    color:rgb(100, 100, 100);
+}
+.begin-btn-bg {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%; 
+    /* background-color: white; */
+}
+.trivia-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    width: 45%;
+    border: 2px solid black;
+}
+.bg-cards{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 95vh;
+    
+    
+}
+.trivia-questions {
+    font-weight:normal;
+}
+
+.truthy-btn-div{
+    display: flex;
+    justify-content: space-evenly;
+}
+.trivia-end-card {
+    flex-direction: column;
+}
+.trivia-end-card button {
+    border: 2px solid black;
+    padding: 5%;
+}
+.trivia-end-card button:hover {
+    transition: .3s;
+    border: 2px solid white;
+    padding: 5%;
+}
+.truthy-btn:hover {
+    cursor: pointer;
+}
