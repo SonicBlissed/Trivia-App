@@ -4,14 +4,16 @@ import axios from "axios";
 
 function App() {
   //useState variables
-  const [results, setResults] = useState({
-    correct: 0,
-    answer: "",
-  });
   const [arrayIndex, setArrayIndex] = useState(0);
   const [classOn, setClassOn] = useState("trivia-cards-initial");
   const [triviaArray, setTriviaArray] = useState([]);
   const [disable, setDisable] = useState(true);
+  const [results, setResults] = useState({
+    correct: 0,
+    answer: "",
+  });
+  const [incorrectArrayQuestions, setIncorrectArrayQuestions] = useState([]);
+  const [incorrectArray, setIncorrectArray] = useState([]);
 
   //useEffects
   useEffect(() => {
@@ -25,12 +27,16 @@ function App() {
   //onclicks and helper functions
   const nextQuestionOnClick = () => {
     setClassOn(`trivia-cards-initial-${arrayIndex}`);
-    // setTriviaArray(triviaArray);
     setResults(() => {
       if (triviaArray[arrayIndex].correct_answer === results.answer) {
         setResults({ ...results, correct: results.correct + 1 });
       } else {
         setResults({ ...results });
+        setIncorrectArrayQuestions([
+          ...incorrectArrayQuestions,
+          triviaArray[arrayIndex].question,
+        ]);
+        setIncorrectArray([...incorrectArray, results.answer]);
       }
     });
     setArrayIndex(() => {
@@ -41,12 +47,10 @@ function App() {
       }
     });
     setDisable(true);
-    console.log(triviaArray);
-    console.log({ ...results });
+
   };
   const beginOnClick = () => {
     setClassOn(`trivia-cards-initial-${arrayIndex}`);
-    // setTriviaArray(triviaArray);
     setArrayIndex(() => {
       if (arrayIndex > 8) {
         return 9;
@@ -58,13 +62,15 @@ function App() {
     });
   };
   const tryAgainOnClick = () => {
-      setArrayIndex(0)
-      setClassOn('trivia-cards-initial')
-      setResults({
-        correct: 0,
-        answer: "",
-      })
-  }
+    setArrayIndex(0);
+    setClassOn("trivia-cards-initial");
+    setResults({
+      correct: 0,
+      answer: "",
+    });
+    setIncorrectArrayQuestions([])
+    setIncorrectArray([])
+  };
 
   const answerButtonTrue = () => {
     setResults({
@@ -99,19 +105,42 @@ function App() {
     );
   } else if (classOn === "trivia-cards-initial-9") {
     return (
-      <div className='bg-cards'>
-          <div className='trivia-end-card'>
-
-          <h2 className='finishing-text'>You got
-              <br/>
-        {results && results.correct > -1 && 
-             results.correct 
-            } <br/>correct!
-            </h2>
+      <div className="bg-cards">
+        <div className="trivia-end-card">
+          <h2 className="finishing-text">
+            {`You got ${
+              results && results.correct > -1 && results.correct
+            }/10 correct!`}
+          </h2>
+          
+          <h3>
+            Here's What You Missed:
+            <div className="results">
+            <div className="results-questions">
+                {incorrectArrayQuestions.map((arr) => {
+                  return (
+                    <div>
+                      <p>{arr}</p>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="results-booleans">
+                {incorrectArray.map((arr) => {
+                  return (
+                    <div>
+                      <p>Your Answer: {arr}</p>
+                    </div>
+                  );
+                })}
+              </div>
+              
+            </div>
+          </h3>
           <button className="buttons" onClick={tryAgainOnClick}>
-             Try Again?
+            Try Again?
           </button>
-           </div>
+        </div>
       </div>
     );
   } else {
@@ -122,23 +151,22 @@ function App() {
             <h2 className="category">{triviaArray[arrayIndex].category}</h2>
             <h3 className="trivia-questions">{`${triviaArray[arrayIndex].question}`}</h3>
             <div className="truthy-btn-div">
-            <button className="truthy-btn" onClick={answerButtonTrue}>
-              True
-            </button>
-            <button className="truthy-btn" onClick={answerButtonFalse}>
-              False
-            </button>
+              <button className="truthy-btn" onClick={answerButtonTrue}>
+                True
+              </button>
+              <button className="truthy-btn" onClick={answerButtonFalse}>
+                False
+              </button>
             </div>
-            <p>{`${arrayIndex+1} out of 10`}</p>
-            <div className='truthy-btn-div'>
-
-            <button
-              className="buttons"
-              onClick={nextQuestionOnClick}
-              disabled={disable}
-            >
-              Next Question
-            </button>
+            <p>{`${arrayIndex + 1} out of 10`}</p>
+            <div className="truthy-btn-div">
+              <button
+                className="buttons"
+                onClick={nextQuestionOnClick}
+                disabled={disable}
+              >
+                Next Question
+              </button>
             </div>
           </div>
         </div>
