@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
+import IncorrectArrays from "./components/IncorrectArrays";
 
 function App() {
   //useState variables
@@ -47,7 +48,6 @@ function App() {
       }
     });
     setDisable(true);
-
   };
   const beginOnClick = () => {
     setClassOn(`trivia-cards-initial-${arrayIndex}`);
@@ -68,8 +68,8 @@ function App() {
       correct: 0,
       answer: "",
     });
-    setIncorrectArrayQuestions([])
-    setIncorrectArray([])
+    setIncorrectArrayQuestions([]);
+    setIncorrectArray([]);
   };
 
   const answerButtonTrue = () => {
@@ -112,31 +112,10 @@ function App() {
               results && results.correct > -1 && results.correct
             }/10 correct!`}
           </h2>
-          
-          <h3>
-            Here's What You Missed:
-            <div className="results">
-            <div className="results-questions">
-                {incorrectArrayQuestions.map((arr) => {
-                  return (
-                    <div>
-                      <p>{arr}</p>
-                    </div>
-                  );
-                })}
-              </div>
-              <div className="results-booleans">
-                {incorrectArray.map((arr) => {
-                  return (
-                    <div>
-                      <p>Your Answer: {arr}</p>
-                    </div>
-                  );
-                })}
-              </div>
-              
-            </div>
-          </h3>
+          <IncorrectArrays
+            incorrectArr={incorrectArray}
+            incorrectArrQuestions={incorrectArrayQuestions}
+          />
           <button className="buttons" onClick={tryAgainOnClick}>
             Try Again?
           </button>

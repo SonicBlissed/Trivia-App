@@ -81,7 +81,7 @@
 .trivia-end-card button:hover {
     transition: .3s;
     border: 2px solid white;
-    padding: 5%;
+    padding: 2.5%;
     background-color: black;
 }
 .truthy-btn:hover {
