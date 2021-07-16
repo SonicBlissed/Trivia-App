@@ -7,15 +7,7 @@ function InitialPage(props) {
     const {classOn, setClassOn, setArrayIndex, arrayIndex} = props;
     const beginOnClick = () => {
         setClassOn(`trivia-cards-initial-${arrayIndex}`);
-        setArrayIndex(() => {
-          if (arrayIndex > 8) {
-            return 9;
-          } else if (arrayIndex === 0) {
-            return arrayIndex;
-          } else {
-            return arrayIndex + 1;
-          }
-        });
+        setArrayIndex(0);
       };
 
     return (
@@ -34,4 +26,4 @@ function InitialPage(props) {
       );
 }
 
-export default InitialPage;
+export default InitialPage
