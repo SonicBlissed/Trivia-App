@@ -11,7 +11,6 @@ function App() {
   const [arrayIndex, setArrayIndex] = useState(0);
   const [classOn, setClassOn] = useState("trivia-cards-initial");
   const [triviaArray, setTriviaArray] = useState([]);
-
   const [results, setResults] = useState({
     correct: 0,
     answer: "",
@@ -56,7 +55,8 @@ function App() {
       <TriviaCards
         incorrectArray={incorrectArray}
         setIncorrectArray={setIncorrectArray}
-        incorrectArrayQuestions={setIncorrectArrayQuestions}
+        incorrectArrayQuestions={incorrectArrayQuestions}
+        setIncorrectArrayQuestions={setIncorrectArrayQuestions}
         results={results}
         setResults={setResults}
         arrayIndex={arrayIndex}
